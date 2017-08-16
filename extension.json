@@ -1,0 +1,36 @@
+{
+	"name": "GetFirst2Sentences",
+	"version": "0.0.0",
+	"author": "Bilka",
+	"url": "https://www.mediawiki.org/wiki/Extension:GetFirst2Sentences",
+	"descriptionmsg": "getfirst2sentences-desc",
+	"license-name": "GNU GPLv3",
+	"type": "parserhook",
+	"AutoloadClasses": {
+		"GetFirst2Sentences": "GetFirst2Sentences.body.php"
+	},
+	"Hooks": {
+		"ParserGetVariableValueSwitch": [
+			"GetFirst2Sentences::wfGetFirst2SentencesAssignAValue"
+		]
+	},
+	"MessagesDirs": {
+		"GetFirst2Sentences": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.getfirst2sentences": {
+			"scripts": [
+				"ext.getfirst2sentences.js",
+			],
+			"styles": [],
+			"dependencies": []
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "GetFirst2Sentences/modules"
+	},
+	"manifest_version": 1
+}
