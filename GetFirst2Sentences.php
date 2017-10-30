@@ -20,7 +20,7 @@ class GetFirst2Sentences
 			$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]) );
 			$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki) );
 			if (strlen($noLinks) > 250) {
-				$noLinks = substr($noLinks, 0, 200) . " ...";
+				$noLinks = substr($noLinks, 0, 200) . "...";
 			}
 			$ret = $noLinks;
         }
