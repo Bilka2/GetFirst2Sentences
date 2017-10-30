@@ -14,7 +14,12 @@ class GetFirst2Sentences
         if ($magicWordId == 'getfirst2sentences') {
 			$page = \WikiPage::factory($parser->getTitle());
             $content = $page->getRevision()->getContent( \Revision::RAW );
-			$ret = \ContentHandler::getContentText( $content );
+			$text = \ContentHandler::getContentText( $content );
+			preg_match('/^[^{\n][^.]+.[^.]+./m', $text, $matches);
+			//remove links
+			$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]) );
+			$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki) );
+			$ret = $noLinks;
         }
 
         return true;
