@@ -5,13 +5,16 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:GetFirst2Sentences",
 	"descriptionmsg": "getfirst2sentences-desc",
 	"license-name": "GNU GPLv3",
-	"type": "parserhook",
+	"type": "variable",
 	"AutoloadClasses": {
 		"GetFirst2Sentences": "GetFirst2Sentences.body.php"
 	},
 	"Hooks": {
 		"ParserGetVariableValueSwitch": [
 			"GetFirst2Sentences::wfGetFirst2SentencesAssignAValue"
+		],
+		"MagicWordwgVariableIDs": [
+			"GetFirst2Sentences::wfGetFirst2SentencesDeclareVarIds"
 		]
 	},
 	"MessagesDirs": {
@@ -19,18 +22,8 @@
 			"i18n"
 		]
 	},
-	"ResourceModules": {
-		"ext.getfirst2sentences": {
-			"scripts": [
-				"ext.getfirst2sentences.js",
-			],
-			"styles": [],
-			"dependencies": []
-		}
-	},
-	"ResourceFileModulePaths": {
-		"localBasePath": "modules",
-		"remoteExtPath": "GetFirst2Sentences/modules"
+	"ExtensionMessagesFiles": {
+		"GetFirst2Sentences": "GetFirst2Sentences.i18n.magic.php"
 	},
 	"manifest_version": 1
 }
