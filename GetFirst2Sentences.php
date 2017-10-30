@@ -13,8 +13,8 @@ class GetFirst2Sentences
     {
         if ($magicWordId == 'getfirst2sentences') {
             $article = new \Article($parser->getTitle());
-            //$ret = $article->getContext()->getLanguage()->getCode();
-			$ret = "Hi";
+            $content = $article->getPage()->getRevision()->getContent( Revision::RAW );
+			$ret = ContentHandler::getContentText( $content );
         }
 
         return true;
