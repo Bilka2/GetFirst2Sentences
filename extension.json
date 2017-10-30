@@ -1,29 +1,23 @@
 {
 	"name": "GetFirst2Sentences",
-	"version": "0.0.0",
 	"author": "Bilka",
 	"url": "https://www.mediawiki.org/wiki/Extension:GetFirst2Sentences",
-	"descriptionmsg": "getfirst2sentences-desc",
-	"license-name": "GNU GPLv3",
+	"description": "Magic word that displays something",
 	"type": "variable",
-	"AutoloadClasses": {
-		"GetFirst2Sentences": "GetFirst2Sentences.body.php"
-	},
+	"license-name": "GNU GPLv3",
+	"version": "1.0.0",
 	"Hooks": {
 		"ParserGetVariableValueSwitch": [
-			"GetFirst2Sentences::wfGetFirst2SentencesAssignAValue"
+			"GetFirst2Sentences\\GetFirst2Sentences::getMagicWord"
 		],
 		"MagicWordwgVariableIDs": [
-			"GetFirst2Sentences::wfGetFirst2SentencesDeclareVarIds"
+			"GetFirst2Sentences\\GetFirst2Sentences::registerMagicWord"
 		]
 	},
-	"MessagesDirs": {
-		"GetFirst2Sentences": [
-			"i18n"
-		]
+	"AutoloadClasses": {
+	"GetFirst2Sentences\\GetFirst2Sentences": "GetFirst2Sentences.php"
 	},
 	"ExtensionMessagesFiles": {
-		"GetFirst2SentencesMagic": "GetFirst2Sentences.i18n.magic.php"
-	},
-	"manifest_version": 1
+	"GetFirst2SentencesMagic": "GetFirst2Sentences.i18n.magic.php"
+	}
 }
