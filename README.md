@@ -1,9 +1,7 @@
 # GetFirst2Sentences
 
-Abandoned WIP of a mediawiki extension that was supposed to be used to get the first 2 sentences of a page from within a template using a magicword. Abandoned because php doesn't have proper regex match (returns true/false instead of a match).
+A mediawiki extension that adds a magicword that gets the first 2 sentences of a page, which can then for example be used to populate the description meta tag using another extension.
 
-Looks like it IS possible to match properly: http://php.net/manual/en/function.preg-match.php
+Magicword: {{GETFIRST2SENTENCES}} (case insensitve)
 
->You use the $matches argument to get the matches. If you are just setting it equal to the function then you are getting if it passes the regex provided.
-
->So preg_match("expression", "string", $matches) would put the matches in $matches. Same for preg_match_all.
+Removes links from the string before returning it.
