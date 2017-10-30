@@ -23,7 +23,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"GetFirst2Sentences": "GetFirst2Sentences.i18n.magic.php"
+		"GetFirst2SentencesMagic": "GetFirst2Sentences.i18n.magic.php"
 	},
 	"manifest_version": 1
 }

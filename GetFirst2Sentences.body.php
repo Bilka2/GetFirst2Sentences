@@ -1,5 +1,5 @@
 <?php
-
+/*
  * Step 4: assign a value to our variable
  */
 /* $wgHooks['ParserGetVariableValueSwitch'][] = 'wfGetFirst2SentencesAssignAValue'; */
@@ -17,13 +17,13 @@ function wfGetFirst2SentencesAssignAValue( &$parser, &$cache, &$magicWordId, &$r
  *         MAG_NIFTYVAR as a variable and not some
  *         other type of magic word
  */
-/* $wgHooks['MagicWordwgVariableIDs'][] = 'wfGetFirst2SentencesDeclareVarIds';
-function wfGetFirst2SentencesDeclareVarIds( &$customVariableIds ) {
+// $wgHooks['MagicWordwgVariableIDs'][] = 'wfGetFirst2SentencesDeclareVarIds';
+function wfGetFirst2SentencesDeclareVarIds(array &$variableIds ) {
 	// $customVariableIds is where MediaWiki wants to store its list of custom
 	// variable IDs. We oblige by adding ours:
-	$customVariableIds[] = 'getfirst2sentences_var1';
+	$variableIds[] = 'getfirst2sentences_var1';
 
 	// must do this or you will silence every MagicWordwgVariableIds hook
 	// registered after this!
 	return true;
-} */
+}
