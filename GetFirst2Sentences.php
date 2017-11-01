@@ -15,12 +15,12 @@ class GetFirst2Sentences
 			$page = \WikiPage::factory($parser->getTitle());
             $content = $page->getRevision()->getContent( \Revision::RAW );
 			$text = \ContentHandler::getContentText( $content );
-			preg_match('/^[^{\n][^.]+.[^.]+./m', $text, $matches);
+			preg_match('/^[^{\n][^.]+.[^\n.]+./m', $text, $matches);
 			//remove links
 			$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]) );
 			$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki) );
-			if (strlen($noLinks) > 250) {
-				$noLinks = substr($noLinks, 0, 200) . "...";
+			if (strlen($noLinks) > 300) {
+				$noLinks = substr($noLinks, 0, strpos($noLinks, ' ', 240)+1) . "...";
 			}
 			$ret = $noLinks;
         }
