@@ -19,14 +19,17 @@ class GetFirst2Sentences
 			if (preg_match('/^\'\'(this (article|page)).+\'\'$/im', $text, $match)) {
 				$text = substr($text, strlen($match[0]));
 			}
-			preg_match('/^[^{\n=<][^\.]+\.([^\n\.]+\.)?/m', $text, $matches);
-			//remove links
-			$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]));
-			$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki));
-			if (strlen($noLinks) > 280) {
-				$noLinks = substr($noLinks, 0, strpos($noLinks, ' ', 230)+1) . "...";
+			if (preg_match('/^[^{\n=<][^\.]+\.([^\n\.]+\.)?/m', $text, $matches)) {
+				//remove links
+				$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]));
+				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki));
+				if (strlen($noLinks) > 280) {
+					$noLinks = substr($noLinks, 0, strpos($noLinks, ' ', 230)+1) . "...";
+				}
+				$ret = $noLinks;
+			} else {
+				$ret = "";
 			}
-			$ret = $noLinks;
         }
 
         return true;
