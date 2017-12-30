@@ -13,25 +13,28 @@ class GetFirst2Sentences
     {
         if ($magicWordId == 'getfirst2sentences') {
 			$page = \WikiPage::factory($parser->getTitle());
-            $content = $page->getRevision()->getContent( \Revision::RAW );
-			$text = \ContentHandler::getContentText( $content );
-			//we might catch the ''this article is about... stuff that's on some pages, but we don't want that
-			if (preg_match('/^\'\'(this (article|page)).+\'\'$/im', $text, $match)) {
-				$text = substr($text, strlen($match[0]));
-			}
-			if (preg_match('/^[^{\n=<][^\.]+\.([^\n\.]+\.)?/m', $text, $matches)) {
-				//remove links
-				$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $matches[0]));
-				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki));
-				if (strlen($noLinks) > 280) {
-					$noLinks = substr($noLinks, 0, strpos($noLinks, ' ', 230)+1) . "...";
+			if ($page->getRevision()) {
+				$content = $page->getRevision()->getContent( \Revision::RAW );
+				$text = \ContentHandler::getContentText( $content );
+				//we might catch the ''this article is about... stuff that's on some pages, but we don't want that
+				if (preg_match('/^\'\'(this (article|page)).+\'\'$/im', $text, $match)) {
+					$text = substr($text, strlen($match[0]));
 				}
-				$ret = $noLinks;
-			} else {
-				$ret = "";
+				//remove links
+				$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $text));
+				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki));
+				if (preg_match('/^[^{\n=<_][^\._]+\.([^\n\._]+\.)?/m', $noLinks, $matches)) { //match first 2 sentences
+					$sentences = $matches[0];
+					if (strlen($sentences) > 280) {
+						$sentences = substr($sentences, 0, strpos($sentences, ' ', 230)+1) . "...";
+					}
+					$ret = $sentences;
+					return true;
+				}
 			}
+			$ret = "";
+			return true;
         }
-
         return true;
     }
 }
