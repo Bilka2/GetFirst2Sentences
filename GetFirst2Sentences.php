@@ -17,13 +17,15 @@ class GetFirst2Sentences
 				$content = $page->getRevision()->getContent( \Revision::RAW );
 				$text = \ContentHandler::getContentText( $content );
 				//we might catch the ''this article is about... stuff that's on some pages, but we don't want that
-				if (preg_match('/^\'\'(this (article|page)).+\'\'$/im', $text, $match)) {
-					$text = substr($text, strlen($match[0]));
-				}
-				//remove links
-				$noInterwiki = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\|\]]+\|/', '', $text));
-				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $noInterwiki));
-				if (preg_match('/^[^{\n=<_][^\._]+\.([^\n\._]+\.)?/m', $noLinks, $matches)) { //match first 2 sentences
+				$text = preg_replace('/^\'\'(this (article|page)).+\'\'$/im', '', $text);
+				//remove images
+				$text = preg_replace('/\[\[File:[^\]]+\]\]/i', '', $text);
+				//remove interwiki links
+				$text = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\]\|]+\|/', '', $text));
+				//remove external links
+				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $text));
+				//match first 2 sentences
+				if (preg_match('/^[^{\n=<_][^\._]+\.([^\n\._]+\.)?/m', $noLinks, $matches)) { 
 					$sentences = $matches[0];
 					if (strlen($sentences) > 280) {
 						$sentences = substr($sentences, 0, strpos($sentences, ' ', 230)+1) . "...";
