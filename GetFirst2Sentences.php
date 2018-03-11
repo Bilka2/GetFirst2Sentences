@@ -24,12 +24,12 @@ class GetFirst2Sentences
 				$text = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\]\|]+\|/', '', $text));
 				//remove external links
 				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $text));
-				//match first 2 sentences
-				if (preg_match('/^[^{\n=<_][^\._]+\.([^\n\._]+\.)?/m', $noLinks, $matches)) { 
+				//match first paragraph
+				if (preg_match('/^[^{\n=<_-][^_\n]+\n/m', $noLinks, $matches)) { 
 					$sentences = $matches[0];
-					if (strlen($sentences) > 280) {
+					/*if (strlen($sentences) > 280) {
 						$sentences = substr($sentences, 0, strpos($sentences, ' ', 230)+1) . "...";
-					}
+					}*/
 					$ret = $sentences;
 					return true;
 				}
