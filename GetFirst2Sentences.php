@@ -19,7 +19,7 @@ class GetFirst2Sentences
 				//we might catch the ''this article is about... stuff that's on some pages, but we don't want that
 				$text = preg_replace('/^\'\'(this (article|page)).+\'\'$/im', '', $text);
 				//remove images
-				$text = preg_replace('/\[\[File:[^\]]+\]\]/i', '', $text);
+				$text = preg_replace('/\[\[File:([^\[\]]*?(\[.*?\]))*[^\[\]]*\]\]/i', '', $text);
 				//remove interwiki links
 				$text = preg_replace('/\[\[|\]\]/', '', preg_replace('/\[\[[^\]\|]+\|/', '', $text));
 				//remove external links
