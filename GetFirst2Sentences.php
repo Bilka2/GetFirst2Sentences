@@ -25,7 +25,7 @@ class GetFirst2Sentences
 				//remove external links
 				$noLinks = preg_replace('/\[|\]/', '', preg_replace('/\[[^\s\]]*( |\])/', '', $text));
 				//match first paragraph
-				if (preg_match('/^[^{\n=<_-][^_\n]+\n/m', $noLinks, $matches)) { 
+				if (preg_match('/^[^!\|\*#{\n=<_-][^_\n]+\n/m', $noLinks, $matches)) { 
 					$sentences = $matches[0];
 					/*if (strlen($sentences) > 280) {
 						$sentences = substr($sentences, 0, strpos($sentences, ' ', 230)+1) . "...";
