@@ -9,12 +9,12 @@ class GetFirst2Sentences
         $variableIds[] = 'getfirst2sentences';
     }
 
-    public static function getMagicWord(\Parser $parser, array $cache, $magicWordId, &$ret)
+    public static function getMagicWord(\Parser $parser, &$variableCache, $magicWordId, &$ret)
     {
         if ($magicWordId == 'getfirst2sentences') {
 			$page = \WikiPage::factory($parser->getTitle());
-			if ($page->getRevision()) {
-				$content = $page->getRevision()->getContent( \Revision::RAW );
+			if ($page->getContent()) {
+				$content = $page->getContent();
 				$text = \ContentHandler::getContentText( $content );
 				//we might catch the ''this article is about... stuff that's on some pages, but we don't want that
 				$text = preg_replace('/^\'\'(this (article|page)).+\'\'$/im', '', $text);
@@ -31,12 +31,15 @@ class GetFirst2Sentences
 						$sentences = substr($sentences, 0, strpos($sentences, ' ', 230)+1) . "...";
 					}*/
 					$ret = $sentences;
+					$variableCache[$magicWordId] = $ret;
 					return true;
 				}
 			}
 			$ret = "";
+			$variableCache[$magicWordId] = $ret;
 			return true;
         }
+	$variableCache[$magicWordId] = $ret;
         return true;
     }
 }
