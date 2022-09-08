@@ -5,7 +5,7 @@
 	"description": "Magic word that gets the first 2 sentences of a page.",
 	"type": "variable",
 	"license-name": "GNU GPLv3",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"Hooks": {
 		"ParserGetVariableValueSwitch": [
 			"GetFirst2Sentences\\GetFirst2Sentences::getMagicWord"
